@@ -1,0 +1,17 @@
+{
+    "name": "nakamastream-desktop",
+    "version": "1.0.0",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "build": "electron-packager . nakamastream-desktop --platform=win32,linux,mas --arch=x64 --overwrite"
+    },
+    "author": "NakamaStream Team",
+    "license": "MIT",
+    "devDependencies": {
+        "electron": "^26.0.0"
+    },
+    "dependencies": {
+        "nakamastream-desktop": "file:"
+    }
+}
