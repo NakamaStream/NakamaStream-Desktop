@@ -16,16 +16,12 @@ function createWindow() {
             session: ses
         },
         autoHideMenuBar: true,
-        icon: path.join(__dirname, 'src/ext/img/NakamStream.png')  // Cambia esta ruta al archivo de icono que desees usar
+        icon: path.join(__dirname, 'src/ext/img/NakamStream.png')
     });
 
     mainWindow.maximize();
 
     mainWindow.loadFile(path.join(__dirname, 'src/public/html/loading.html'));
-
-    setTimeout(() => {
-        mainWindow.loadFile(path.join(__dirname, 'src/public/html/NakamaStream.html'));
-    }, 6000);
 
     ipcMain.handle('get-cookies', async () => {
         try {
