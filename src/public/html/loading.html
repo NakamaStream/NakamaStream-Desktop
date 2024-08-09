@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NakamaStream - Cargando</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="../css/startup.main.css">
+</head>
+<body>
+    <section class="hero is-fullheight">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <img src="../../ext/img/NakamaStream-traspa (1).png" alt="Logo" class="logo">
+                <div class="loading-message"></div>
+                <div class="spinner"></div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const loadingMessages = [
+                "Preparando recursos...",
+                "Por favor, espere...",
+                "Cargando Archivos...",
+                "Casi listo...",
+                "Éxito"
+            ];
+
+            const loadingMessageElement = document.querySelector('.loading-message');
+            let currentIndex = 0;
+
+            function updateMessage() {
+                loadingMessageElement.textContent = loadingMessages[currentIndex];
+                currentIndex = (currentIndex + 1) % loadingMessages.length;
+            }
+
+            setInterval(updateMessage, 1000);
+        });
+    </script>
+</body>
+</html>

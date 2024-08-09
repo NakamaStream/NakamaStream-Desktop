@@ -1,0 +1,85 @@
+/* Animación para el logo */
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.logo {
+    max-width: 100%;
+    margin-bottom: 20px;
+    animation: bounceIn 1s ease-out;
+    mask-image: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 1) 70%,
+        rgba(255, 255, 255, 0) 100%
+    );
+}
+
+.loading-message {
+    color: #ff6b6b;
+    font-size: 2rem;
+    font-weight: bold;
+    animation: fadeInUp 1s ease-out;
+}
+
+.spinner {
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #ff6b6b;
+    width: 60px;
+    height: 60px;
+    margin: 20px auto;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Estilo para centrar el contenido */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: white;
+}
+
+.hero-body {
+    text-align: center;
+    padding: 0 20px;
+}
+
+@media (max-width: 768px) {
+    .loading-message {
+        font-size: 1.25rem;
+    }
+
+    .spinner {
+        width: 40px;
+        height: 40px;
+    }
+}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NakamaStream</title>
+    <link rel="stylesheet" href="../css/webview.main.css">
+    <script src="/preload.js"></script>
+</head>
+<body>
+    <webview src="https://www.google.com/" allowpopups></webview>
+
+    <script>
+        window.electron.getCookies().then(cookies => {
+            console.log("Cookies en la página:", cookies);
+        });
+    </script>
+</body>
+</html>
