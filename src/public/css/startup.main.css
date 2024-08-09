@@ -83,3 +83,36 @@
         height: 40px;
     }
 }
+
+body {
+    background-color: #121212;
+}
+.logo {
+    max-width: 400px;
+    margin-bottom: 2rem;
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+.loading-message {
+    color: #3e3e3e;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+.progress-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #333;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.progress-bar {
+    width: 0;
+    height: 8px;
+    background-color: #ff6b6b;
+    transition: width 1s;
+}
