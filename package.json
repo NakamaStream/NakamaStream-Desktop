@@ -4,12 +4,16 @@
     "main": "main.js",
     "scripts": {
         "start": "electron .",
-        "build": "electron-packager . nakamastream-desktop --platform=win32,linux,mas --arch=x64 --overwrite"
+        "dev": "electron .",
+        "package:win": "electron-packager . NakamaStream --platform=win32 --arch=x64,ia32 --out=dist --overwrite --icon=src/ext/img/NakamStream.ico --ignore=^node_modules/nakamastream-desktop",
+        "package:mac": "electron-packager . NakamaStream --platform=darwin --arch=x64 --out=dist --overwrite --icon=src/ext/img/NakamStream.icns --ignore=^node_modules/nakamastream-desktop",
+        "package:linux": "electron-packager . NakamaStream --platform=linux --arch=x64 --out=dist --overwrite --icon=src/ext/img/NakamStream.png --ignore=^node_modules/nakamastream-desktop"
     },
     "author": "NakamaStream Team",
     "license": "MIT",
     "devDependencies": {
-        "electron": "^26.0.0"
+        "electron": "^26.6.10",
+        "electron-packager": "^17.1.2"
     },
     "dependencies": {
         "nakamastream-desktop": "file:"
