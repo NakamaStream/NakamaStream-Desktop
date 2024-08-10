@@ -1,7 +1,8 @@
-const { app, BrowserWindow, session, ipcMain } = require('electron');
+const { app, BrowserWindow, session, ipcMain, dialog } = require('electron');
 const path = require('path');
 
 let mainWindow;
+let confirmWindow;
 
 function createWindow() {
     const ses = session.fromPartition('persist:electron-webview-session');
@@ -32,7 +33,58 @@ function createWindow() {
             return [];
         }
     });
+
+    mainWindow.on('close', (e) => {
+        e.preventDefault();
+        createConfirmWindow();
+    });
 }
+
+function createConfirmWindow() {
+    const [mainWindowX, mainWindowY] = mainWindow.getPosition();
+    const [mainWindowWidth, mainWindowHeight] = mainWindow.getSize();
+
+    const confirmWindowWidth = 400;
+    const confirmWindowHeight = 200;
+
+    const confirmWindowX = mainWindowX + Math.round((mainWindowWidth - confirmWindowWidth) / 2);
+    const confirmWindowY = mainWindowY + Math.round((mainWindowHeight - confirmWindowHeight) / 2);
+
+    confirmWindow = new BrowserWindow({
+        width: confirmWindowWidth,
+        height: confirmWindowHeight,
+        x: confirmWindowX,
+        y: confirmWindowY,
+        frame: false,
+        modal: true,
+        parent: mainWindow,
+        resizable: false,
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false
+        }
+    });
+
+    confirmWindow.loadFile(path.join(__dirname, 'src/public/html/confirm.html'));
+    confirmWindow.setMenuBarVisibility(false);
+    confirmWindow.setMinimumSize(confirmWindowWidth, confirmWindowHeight);
+    confirmWindow.setMaximumSize(confirmWindowWidth, confirmWindowHeight);
+}
+
+ipcMain.on('cancel-close', () => {
+    if (confirmWindow) {
+        confirmWindow.close();
+        confirmWindow = null;
+    }
+});
+
+ipcMain.on('confirm-close', () => {
+    if (confirmWindow) {
+        confirmWindow.close();
+        confirmWindow = null;
+    }
+    mainWindow.destroy();
+});
 
 app.whenReady().then(() => {
     createWindow();
