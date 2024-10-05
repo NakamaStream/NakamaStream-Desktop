@@ -8,9 +8,10 @@
     <script src="/preload.js"></script>
 </head>
 <body>
-    <webview src="https://www.google.com/" allowpopups></webview>
+    <webview id="webview" src="https://nakamastream.lat" allowpopups></webview>
 
     <script>
+        // Obtener cookies y mostrarlas en la consola
         window.electron.getCookies().then(cookies => {
             console.log("Cookies en la página:", cookies);
         });
