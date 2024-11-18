@@ -13,35 +13,43 @@
                         'custom-red': '#ff6b6b',
                     },
                     animation: {
-                        'pulse-scale': 'pulse-scale 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'pulse-soft': 'pulse-soft 2s ease-in-out infinite',
                     },
                     keyframes: {
-                        'pulse-scale': {
-                            '0%, 100%': { transform: 'scale(1)', opacity: 1 },
-                            '50%': { transform: 'scale(1.1)', opacity: 0.7 },
-                        }
-                    }
+                        'pulse-soft': {
+                            '0%, 100%': { opacity: 1 },
+                            '50%': { opacity: 0.7 },
+                        },
+                    },
                 }
             }
         }
     </script>
+    <style>
+        /* Evitar que aparezca la barra de desplazamiento */
+        html, body {
+            height: 100%;        /* Asegura que ocupen toda la pantalla */
+            margin: 0;           /* Elimina márgenes por defecto */
+            overflow: hidden;    /* Oculta las barras de desplazamiento */
+        }
+    </style>
 </head>
-<body class="bg-white flex items-center justify-center h-screen">
-    <div class="text-center">
-        <div class="relative inline-flex">
-            <div class="absolute inset-0 rounded-full bg-custom-red opacity-20 animate-ping"></div>
-            <div class="relative inline-flex rounded-full h-32 w-32 bg-custom-red animate-pulse-scale">
-                <svg class="w-20 h-20 text-white m-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
-                </svg>
-            </div>
+<body class="bg-white flex items-center justify-center min-h-screen">
+    <div class="text-center p-8 rounded-xl shadow-lg bg-white">
+        <!-- Logo -->
+        <div class="mb-8">
+            <img src="https://github.com/NakamaStream/Resources/raw/main/NakamStream-logo-HD-removebg.png?raw=true" alt="NakamaStream Logo" class="w-40 h-40 mx-auto animate-pulse-soft">
         </div>
-        <h2 class="mt-8 text-3xl font-bold text-custom-red animate-pulse">Cargando</h2>
-        <p class="mt-2 text-gray-600">Estamos preparando todo para ti</p>
-        <div class="mt-4 space-x-1">
-            <span class="inline-block w-3 h-3 bg-custom-red rounded-full animate-bounce" style="animation-delay: 0s"></span>
-            <span class="inline-block w-3 h-3 bg-custom-red rounded-full animate-bounce" style="animation-delay: 0.2s"></span>
-            <span class="inline-block w-3 h-3 bg-custom-red rounded-full animate-bounce" style="animation-delay: 0.4s"></span>
+        
+        <!-- Título de carga -->
+        <h2 class="text-4xl font-bold text-custom-red mb-4">Cargando...</h2>
+        <p class="text-gray-600 mb-6">Estamos preparando todo para ti</p>
+        
+        <!-- Animación simple de puntos -->
+        <div class="flex justify-center space-x-2">
+            <span class="w-3 h-3 bg-custom-red rounded-full animate-bounce" style="animation-delay: 0s"></span>
+            <span class="w-3 h-3 bg-custom-red rounded-full animate-bounce" style="animation-delay: 0.2s"></span>
+            <span class="w-3 h-3 bg-custom-red rounded-full animate-bounce" style="animation-delay: 0.4s"></span>
         </div>
     </div>
 </body>
