@@ -2,6 +2,7 @@ const { app, BrowserWindow, Notification } = require('electron');
 const path = require('path');
 const rpc = require('discord-rpc');
 const { registerShortcuts, unregisterShortcuts } = require('./src/resources/extensions/keyboard');  // Importar las funciones del archivo keyboard.js
+const { createContextMenu } = require('./src/resources/extensions/contextMenu');  // Importar la función para el menú contextual
 
 let mainWindow;
 let loadingWindow;
@@ -106,6 +107,12 @@ function createMainWindow() {
     });
     
     mainWindow.loadURL('https://nakamastream.lat/login');
+
+    // Configurar el menú contextual para el webview
+    mainWindow.webContents.on('context-menu', (e, params) => {
+        const contextMenu = createContextMenu(mainWindow);  // Usar la función importada
+        contextMenu.popup({ window: mainWindow });
+    });
 
     mainWindow.webContents.on('did-finish-load', () => {
         try {
