@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Información del Teclado</title>
+    <title>NakamaLauncher - Keyboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -17,27 +17,44 @@
         }
     </script>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
-    <div class="bg-white p-8 rounded-2xl shadow-lg max-w-md w-full">
-        <h1 class="text-4xl font-bold mb-8 text-custom text-center">Atajos de Teclado</h1>
-        <ul class="space-y-6">
-            <li class="flex items-center bg-gray-50 p-4 rounded-xl transition-all hover:shadow-md">
-                <span class="bg-custom text-white font-bold py-2 px-3 rounded-lg mr-4 min-w-[70px] text-center shadow-sm">F5</span>
-                <span class="text-gray-700 font-medium">Recargar la página</span>
-            </li>
-            <li class="flex items-center bg-gray-50 p-4 rounded-xl transition-all hover:shadow-md">
-                <span class="bg-custom text-white font-bold py-2 px-3 rounded-lg mr-4 min-w-[70px] text-center shadow-sm">Ctrl + M</span>
-                <span class="text-gray-700 font-medium">Minimizar la ventana</span>
-            </li>
-            <li class="flex items-center bg-gray-50 p-4 rounded-xl transition-all hover:shadow-md">
-                <span class="bg-custom text-white font-bold py-2 px-3 rounded-lg mr-4 min-w-[70px] text-center shadow-sm">Ctrl + +</span>
-                <span class="text-gray-700 font-medium">Acercar la ventana</span>
-            </li>
-            <li class="flex items-center bg-gray-50 p-4 rounded-xl transition-all hover:shadow-md">
-                <span class="bg-custom text-white font-bold py-2 px-3 rounded-lg mr-4 min-w-[70px] text-center shadow-sm">Ctrl + -</span>
-                <span class="text-gray-700 font-medium">Alejar la ventana</span>
-            </li>
-        </ul>
+<body class="bg-gray-900 bg-opacity-50 min-h-screen flex items-center justify-center p-4">
+    <!-- Modal Background -->
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <!-- Modal Content -->
+        <div class="bg-white p-8 rounded-2xl shadow-lg w-[400px] h-[400px] relative">
+            <!-- Close Button -->
+            <button 
+                id="closeButton" 
+                class="absolute top-4 right-4 text-gray-500 hover:text-custom transition-colors">
+                ✖
+            </button>
+            <h1 class="text-4xl font-bold mb-8 text-custom text-center">Atajos de Teclado</h1>
+            <ul class="space-y-6">
+                <li class="flex items-center bg-gray-50 p-4 rounded-xl transition-all hover:shadow-md">
+                    <span class="bg-custom text-white font-bold py-2 px-3 rounded-lg mr-4 min-w-[70px] text-center shadow-sm">F5</span>
+                    <span class="text-gray-700 font-medium">Recargar App</span>
+                </li>
+                <li class="flex items-center bg-gray-50 p-4 rounded-xl transition-all hover:shadow-md">
+                    <span class="bg-custom text-white font-bold py-2 px-3 rounded-lg mr-4 min-w-[70px] text-center shadow-sm">Ctrl + M</span>
+                    <span class="text-gray-700 font-medium">Minimizar la ventana</span>
+                </li>
+                <li class="flex items-center bg-gray-50 p-4 rounded-xl transition-all hover:shadow-md">
+                    <span class="bg-custom text-white font-bold py-2 px-3 rounded-lg mr-4 min-w-[70px] text-center shadow-sm">Ctrl + +</span>
+                    <span class="text-gray-700 font-medium">Acercar la ventana</span>
+                </li>
+                <li class="flex items-center bg-gray-50 p-4 rounded-xl transition-all hover:shadow-md">
+                    <span class="bg-custom text-white font-bold py-2 px-3 rounded-lg mr-4 min-w-[70px] text-center shadow-sm">Ctrl + -</span>
+                    <span class="text-gray-700 font-medium">Alejar la ventana</span>
+                </li>
+            </ul>
+        </div>
     </div>
+
+    <script>
+        // Agregar funcionalidad para cerrar el modal
+        document.getElementById('closeButton').addEventListener('click', () => {
+            window.close(); // Cierra la ventana en el contexto de Electron
+        });
+    </script>
 </body>
 </html>
