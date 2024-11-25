@@ -1,38 +1,50 @@
 const { Menu, MenuItem, BrowserWindow } = require('electron');
 const path = require('path');
 
+let keyboardWindow = null; // Almacenamos la referencia de la ventana secundaria
+
 // Función para crear el menú contextual
 function createContextMenu(mainWindow) {
     const contextMenu = new Menu();
 
     // Opción para recargar la página
     contextMenu.append(new MenuItem({
-        label: 'Recargar Página',
+        label: 'Reload App',
         click: () => {
-            mainWindow.webContents.reload();
+            if (mainWindow && !mainWindow.isDestroyed()) {
+                mainWindow.webContents.reload();
+            }
         }
     }));
 
     // Opción para mostrar la información del teclado
     contextMenu.append(new MenuItem({
-        label: 'Mostrar información del teclado',
+        label: 'Keyboard',
         click: () => {
-            // Crear una nueva ventana para mostrar la información
-            const keyboardWindow = new BrowserWindow({
-                width: 600,
-                height: 400,
+            // Evitar múltiples instancias de la ventana secundaria
+            if (keyboardWindow && !keyboardWindow.isDestroyed()) {
+                keyboardWindow.focus();
+                return;
+            }
+
+            keyboardWindow = new BrowserWindow({
+                parent: mainWindow, // Ventana principal como padre
+                modal: true,        // Comportamiento modal
+                width: 400,         // Ajustar el ancho del modal
+                height: 400,        // Ajustar la altura del modal
+                frame: false,       // Sin barra de título
+                resizable: false,   // Deshabilitar redimensionamiento
                 webPreferences: {
-                    nodeIntegration: true // Habilitar nodeIntegration si es necesario
+                    contextIsolation: true, // Mejora de seguridad
+                    preload: path.join(__dirname, 'preload.js') // Archivo preload opcional
                 }
-            });
+            });            
 
-            // Cargar un archivo HTML con la información del teclado
-            // Usar path.join para construir la ruta absoluta
+            // Cargar el archivo HTML con la información del teclado
             const htmlPath = path.join(__dirname, '../html/keyboard-info.html'); // Ajusta según la estructura
-
             keyboardWindow.loadFile(htmlPath);
 
-            // Opción para cerrar la ventana cuando se cierre
+            // Limpiar referencia de la ventana al cerrarla
             keyboardWindow.on('closed', () => {
                 keyboardWindow = null;
             });
