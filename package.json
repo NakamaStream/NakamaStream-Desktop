@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-builder build --win --mac --linux",
+    "build:win": "electron-builder build --win",
+    "build:mac": "electron-builder build --mac",
+    "build:linux": "electron-builder build --linux"
   },
   "keywords": [],
   "author": "",
@@ -18,5 +22,39 @@
     "electron": "^33.2.0",
     "electron-builder": "^25.1.8",
     "uglify-js": "^3.19.3"
+  },
+  "build": {
+    "appId": "lat.nakamastream.desktop",
+    "productName": "Nakamastream",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ],
+      "icon": "src/resources/img/Nakamastream.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "src/resources/img/Nakamastream.icns"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "icon": "src/resources/img/Nakamastream.png"
+    },
+    "publish": {
+      "provider": "github",
+      "releaseType": "release"
+    }
   }
 }
