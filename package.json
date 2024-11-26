@@ -4,10 +4,10 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder build --win --mac --linux",
-    "build:win": "electron-builder build --win",
-    "build:mac": "electron-builder build --mac",
-    "build:linux": "electron-builder build --linux"
+    "build": "electron-builder build --win --mac --linux -p always",
+    "build:win": "electron-builder build --win -p always",
+    "build:mac": "electron-builder build --mac -p always",
+    "build:linux": "electron-builder build --linux -p always"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,7 @@
   "description": "",
   "dependencies": {
     "axios": "^1.7.7",
+    "crypto": "^1.0.1",
     "discord-rpc": "^4.0.1",
     "javascript-obfuscator": "^4.1.1"
   },
@@ -54,7 +55,10 @@
     },
     "publish": {
       "provider": "github",
-      "releaseType": "release"
+      "owner": "NakamaStream",
+      "repo": "NakamaStream-Desktop",
+      "releaseType": "release",
+      "private": false
     }
   }
 }
