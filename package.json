@@ -10,9 +10,12 @@
     "build:linux": "electron-builder build --linux -p always"
   },
   "keywords": [],
-  "author": "",
+  "author": {
+    "name": "NakamaStream",
+    "email": "nakamastreamhelp@gmail.com"
+  },
   "license": "ISC",
-  "description": "",
+  "description": "NakamaStream Desktop App",
   "dependencies": {
     "axios": "^1.7.7",
     "crypto": "^1.0.1",
@@ -51,7 +54,10 @@
         "AppImage",
         "deb"
       ],
-      "icon": "src/resources/img/Nakamastream.png"
+      "icon": "src/resources/img/Nakamastream.png",
+      "category": "Utility",
+      "maintainer": "NakamaStream",
+      "vendor": "NakamaStream"
     },
     "publish": {
       "provider": "github",
