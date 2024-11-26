@@ -1,4 +1,4 @@
-name: Build and Release
+name: Build
 
 on:
   push:
@@ -25,7 +25,7 @@ jobs:
       - name: Instalar dependencias
         run: npm ci
         
-      - name: Build y Release
+      - name: Build
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run build
