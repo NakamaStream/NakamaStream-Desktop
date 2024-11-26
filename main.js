@@ -8,8 +8,7 @@ let mainWindow;
 let loadingWindow;
 
 // Discord Rich Presence
-const clientId = 'CLIENTE DE TU APLICACION';
-const rpcClient = new rpc.Client({ transport: 'ipc' });
+const _0x3f2a=['Client','ipc'];const clientId=Buffer.from('MTI4NzMwNDQ0ODU0ODQwOTM3NA==','base64').toString();const rpcClient=new rpc[_0x3f2a[0x0]]({transport:_0x3f2a[0x1]});
 
 // Título fijo de la notificación
 const notificationTitle = 'NakamaStream Desktop';
@@ -40,13 +39,7 @@ function initializeDiscordRPC() {
         console.log('Discord RPC conectado.');
         showNotification('Tu estado se está compartiendo en Discord.', path.join(__dirname, 'src/resources/img/NakamaStreamIcon.png'));
 
-        rpcClient.setActivity({
-            details: 'Explorando la aplicación',
-            state: 'En el inicio de sesión',
-            startTimestamp: new Date(),
-            largeImageKey: 'logo',
-            largeImageText: 'NakamaStream',
-        });
+        updateDiscordActivity('Iniciando sesión');
     });
 
     rpcClient.on('disconnected', () => {
@@ -58,6 +51,19 @@ function initializeDiscordRPC() {
         console.error('Error al conectar Discord RPC:', err.message);
         showNotification('No se pudo conectar a Discord.', path.join(__dirname, 'src/resources/img/NakamaStreamIcon.png'));
     });
+}
+
+// Función para actualizar la actividad de Discord
+function updateDiscordActivity(pageTitle) {
+    if (rpcClient && rpcClient.transport.socket) {
+        rpcClient.setActivity({
+            details: 'Navegando por la aplicación',
+            state: `En: ${pageTitle}`,
+            startTimestamp: new Date(),
+            largeImageKey: 'logo',
+            largeImageText: 'NakamaStream',
+        });
+    }
 }
 
 // Función para crear la ventana de carga
@@ -105,7 +111,7 @@ function createMainWindow() {
         maximizable: true,
         closable: true,
     });
-    
+
     mainWindow.loadURL('https://nakamastream.lat/login');
 
     // Configurar el menú contextual para el webview
@@ -120,18 +126,16 @@ function createMainWindow() {
                 loadingWindow.close();
             }
 
-            if (rpcClient && rpcClient.transport.socket) {
-                rpcClient.setActivity({
-                    details: 'Navegando por la aplicación',
-                    state: 'En la página principal',
-                    startTimestamp: new Date(),
-                    largeImageKey: 'logo',
-                    largeImageText: 'NakamaStream',
-                });
-            }
+            mainWindow.webContents.executeJavaScript('document.title').then(title => {
+                updateDiscordActivity(title);
+            });
         } catch (error) {
             console.error('Error al cerrar la ventana de carga:', error);
         }
+    });
+
+    mainWindow.webContents.on('page-title-updated', (event, title) => {
+        updateDiscordActivity(title);
     });
 
     mainWindow.on('closed', () => {
