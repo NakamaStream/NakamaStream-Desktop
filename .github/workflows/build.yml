@@ -5,10 +5,8 @@ on:
     branches: [ "main" ]
     tags: [ 'v*' ]
   workflow_dispatch:
-
 permissions:
   contents: write
-
 jobs:
   release:
     runs-on: ${{ matrix.os }}
@@ -25,13 +23,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-
+          
       - name: Instalar dependencias de Linux
         if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt-get update
-          sudo apt-get install -y libarchive-tools rpm libx11-dev libxkbfile-dev
-      
+          sudo apt-get install -y libarchive-tools rpm
+          
       - name: Instalar dependencias
         run: |
           npm install
@@ -47,4 +45,5 @@ jobs:
             npm run build:mac
           else
             npm run build:linux
+          fi
         shell: bash
