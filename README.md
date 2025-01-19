@@ -35,5 +35,5 @@ NakamaStream Desktop es la versión especialmente diseñada de la plataforma Nak
 | **Sistema Operativo** | **Versión** | **Arquitectura** |
 |-----------------------|-------------|------------------|
 | **Windows**           | 1.0.0       | 32-bit, 64-bit   |
-| **macOS** ⌛             | 1.0.0       | Intel (64-bit) |
-| **Linux** ⌛           | 1.0.0       | 64-bit           |
+| **macOS**             | 1.0.0       | Intel (64-bit)   |
+| **Linux**             | 1.0.0       | 64-bit           |
